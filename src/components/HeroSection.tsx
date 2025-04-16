@@ -53,8 +53,8 @@ const HeroSection: React.FC = () => {
 
       {/* Content - Improved alignment with flex centering and adjusted horizontal padding */}
       <div className="relative h-full w-full flex items-center">
-        <div className="container mx-auto px-4">
-          <div className="max-w-[700px] ml-[10%] md:ml-[10%] lg:ml-[15%] xl:ml-0 xl:pl-[15%]">
+        <div className="container mx-auto px-4 md:px-8 lg:px-16">
+          <div className="max-w-[700px] w-full">
             <div className="text-left flex flex-col space-y-6 text-white">
               <h1 className="font-jakarta font-bold text-4xl md:text-5xl lg:text-6xl">
                 Publish Once. <span className="text-[#4F46E5]">Distribute Everywhere.</span>
