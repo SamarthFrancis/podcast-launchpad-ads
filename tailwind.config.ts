@@ -97,9 +97,21 @@ export default {
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'spin-slow': 'spin 15s linear infinite',
+			},
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		function({ addUtilities, theme }) {
+			const newUtilities = {};
+			for (let i = 1; i <= 10; i++) {
+				newUtilities[`.animation-delay-${i * 1000}`] = {
+					'animation-delay': `${i}s`,
+				};
+			}
+			addUtilities(newUtilities);
+		}
+	],
 } satisfies Config;
