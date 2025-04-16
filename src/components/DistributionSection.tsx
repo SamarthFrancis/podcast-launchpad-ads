@@ -23,11 +23,13 @@ const DistributionSection: React.FC = () => {
     <section className="py-24 px-4 bg-[#111111] text-white">
       <div className="container mx-auto text-center">
         <h2 className="font-jakarta font-bold text-4xl md:text-5xl mb-6 text-white">
-          Get listed in the top podcast directories
+          Your Podcast. Everywhere It Matters.
         </h2>
-        <p className="font-manrope text-xl text-gray-300 mb-12 max-w-4xl mx-auto">
-          Reach millions of listeners by listing your podcast in Apple Podcasts, Spotify, Podcast Index, 
-          Amazon Music, YouTube, and all of the <span className="underline">podcast directories</span>.
+        <p className="font-manrope text-xl text-gray-300 mb-4 max-w-4xl mx-auto">
+          We distribute your podcast to 20+ platforms, including Spotify, Apple Podcasts, YouTube, and more.
+        </p>
+        <p className="font-manrope text-lg text-gray-400 mb-12">
+          Trusted by over 30,000+ creators and brands
         </p>
         
         {/* Responsive desktop display for larger screens */}
