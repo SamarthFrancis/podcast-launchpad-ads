@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -18,7 +19,15 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'jakarta': ['"Plus Jakarta Sans"', 'sans-serif'],
+				'manrope': ['Manrope', 'sans-serif'],
+			},
 			colors: {
+				'primary': '#4F46E5',
+				'secondary': '#7C3AED',
+				'dark': '#111827',
+				'gray': '#4B5563',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
