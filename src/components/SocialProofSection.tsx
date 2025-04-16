@@ -1,55 +1,75 @@
 
 import React from 'react';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { Star } from 'lucide-react';
 
 const SocialProofSection: React.FC = () => {
   const reviews = [
     {
-      text: "The best podcast platform I've used. It made distribution so easy!",
+      text: "This platform revolutionized our podcast reach. We went from 500 to 15,000 monthly listeners in just 8 weeks!",
       author: "Mike Johnson",
-      role: "Tech Podcast Host"
+      role: "The Tech Insider Podcast"
     },
     {
-      text: "We saw our listenership grow by 300% after switching to this platform.",
+      text: "I was spending 6 hours per week on distribution. Now it's 10 minutes. The ROI is incredible.",
       author: "Sarah Miller",
-      role: "Business Podcaster"
+      role: "Business Growth Show"
     },
     {
-      text: "The analytics are incredible. Finally I understand my audience.",
+      text: "The analytics alone are worth the price. Finally understanding our audience changed everything.",
       author: "David Chen",
-      role: "Education Podcast"
+      role: "History Untold"
     }
   ];
 
-  const podcasts = Array(8).fill("Podcast");
-
   return (
-    <section className="py-16 px-4 bg-gray-50">
+    <section className="py-20 px-4 bg-gray-50">
       <div className="container mx-auto">
         <h2 className="font-jakarta font-bold text-3xl md:text-4xl mb-12 text-center text-dark">
-          Creators Who Trust Us
+          Loved by Creators Worldwide
         </h2>
         
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-16">
-          {podcasts.map((podcast, index) => (
+          {Array(8).fill(null).map((_, index) => (
             <div 
               key={index} 
-              className="bg-white rounded-lg p-6 shadow-sm flex items-center justify-center h-28"
+              className="bg-white rounded-lg p-4 shadow-sm aspect-square flex items-center justify-center overflow-hidden"
             >
-              <span className="font-medium text-gray">{podcast} {index + 1}</span>
+              <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-lg font-bold text-gray-400">
+                {index + 1}
+              </div>
             </div>
           ))}
         </div>
         
-        <div className="text-center mb-8">
-          <div className="flex justify-center space-x-8 mb-4">
-            <div className="text-dark font-bold">Capterra</div>
-            <div className="text-dark font-bold">GetApp</div>
-            <div className="text-dark font-bold">G2</div>
+        <div className="flex flex-col md:flex-row justify-center items-center gap-8 mb-12">
+          <div className="flex flex-col items-center">
+            <div className="text-dark font-bold mb-2">Capterra</div>
+            <div className="flex text-yellow-400">
+              {Array(5).fill(null).map((_, i) => (
+                <Star key={i} fill="currentColor" className="h-5 w-5" />
+              ))}
+              <span className="text-dark ml-2 font-medium">4.8</span>
+            </div>
           </div>
-          <div className="flex justify-center mb-4">
-            <div className="flex text-yellow-400 text-2xl">
-              ★★★★★ <span className="text-dark ml-2">4.9/5</span>
+          
+          <div className="flex flex-col items-center">
+            <div className="text-dark font-bold mb-2">GetApp</div>
+            <div className="flex text-yellow-400">
+              {Array(5).fill(null).map((_, i) => (
+                <Star key={i} fill="currentColor" className="h-5 w-5" />
+              ))}
+              <span className="text-dark ml-2 font-medium">4.9</span>
+            </div>
+          </div>
+          
+          <div className="flex flex-col items-center">
+            <div className="text-dark font-bold mb-2">G2</div>
+            <div className="flex text-yellow-400">
+              {Array(5).fill(null).map((_, i) => (
+                <Star key={i} fill="currentColor" className="h-5 w-5" />
+              ))}
+              <span className="text-dark ml-2 font-medium">4.7</span>
             </div>
           </div>
         </div>
@@ -58,18 +78,19 @@ const SocialProofSection: React.FC = () => {
           <CarouselContent>
             {reviews.map((review, index) => (
               <CarouselItem key={index}>
-                <div className="bg-white p-6 rounded-lg shadow">
-                  <p className="font-manrope text-lg mb-4">{review.text}</p>
-                  <p className="font-jakarta font-medium">{review.author}</p>
-                  <p className="text-gray">{review.role}</p>
+                <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100">
+                  <p className="font-manrope text-lg mb-6 italic">"{review.text}"</p>
+                  <div className="flex items-center">
+                    <div className="h-10 w-10 rounded-full bg-gray-200 mr-3"></div>
+                    <div>
+                      <p className="font-jakarta font-medium">{review.author}</p>
+                      <p className="text-gray text-sm">{review.role}</p>
+                    </div>
+                  </div>
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="flex justify-center mt-4">
-            <CarouselPrevious className="relative static mr-2" />
-            <CarouselNext className="relative static ml-2" />
-          </div>
         </Carousel>
       </div>
     </section>
