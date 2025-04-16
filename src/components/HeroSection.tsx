@@ -1,9 +1,35 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 const HeroSection: React.FC = () => {
+  // Track if video is loaded
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+
+  // Video sources to try
+  const videoSources = [
+    "https://cdn.pixabay.com/vimeo/506768775/podcast-70809.mp4?width=1280&hash=0c81ac75aa0e7634a85a7848e5e3412b777e17aa",
+    "https://cdn.coverr.co/videos/coverr-woman-recording-podcast-in-a-studio-5085/1080p.mp4",
+    "https://assets.mixkit.co/videos/preview/mixkit-woman-talking-into-a-podcast-microphone-42477-large.mp4"
+  ];
+  
+  // Current video source index
+  const [currentSourceIndex, setCurrentSourceIndex] = useState(0);
+
+  // Handle video load error
+  const handleVideoError = () => {
+    if (currentSourceIndex < videoSources.length - 1) {
+      // Try next video source
+      setCurrentSourceIndex(prevIndex => prevIndex + 1);
+    } else {
+      // All sources failed
+      setVideoError(true);
+      console.error("All video sources failed to load");
+    }
+  };
+
   return (
     <section className="relative w-full overflow-hidden">
       {/* Video Background */}
@@ -14,12 +40,20 @@ const HeroSection: React.FC = () => {
           muted 
           loop 
           playsInline
+          onLoadedData={() => setIsVideoLoaded(true)}
+          onError={handleVideoError}
         >
-          <source src="https://player.vimeo.com/external/528726903.sd.mp4?s=d989338dda0412e60c901fe3c8d70583dc50944b&profile_id=165&oauth2_token_id=57447761" type="video/mp4" />
+          <source src={videoSources[currentSourceIndex]} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+        
         {/* Dark Overlay - increased opacity for better text visibility */}
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+        
+        {/* Fallback image if video fails */}
+        {videoError && (
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-purple-900"></div>
+        )}
       </div>
 
       {/* Content */}
