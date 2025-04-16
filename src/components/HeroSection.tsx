@@ -4,55 +4,41 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 const HeroSection: React.FC = () => {
-  // Track if video is loaded
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-  const [videoError, setVideoError] = useState(false);
+  // Track if video iframe is loaded
+  const [isIframeLoaded, setIsIframeLoaded] = useState(false);
 
-  // Video sources to try
-  const videoSources = [
-    "https://vimeo.com/1075997899/d409319f4a?share=copy", // Primary source - user provided Vimeo link
-    "https://cdn.pixabay.com/vimeo/506768775/podcast-70809.mp4?width=1280&hash=0c81ac75aa0e7634a85a7848e5e3412b777e17aa",
-    "https://cdn.coverr.co/videos/coverr-woman-recording-podcast-in-a-studio-5085/1080p.mp4",
-    "https://assets.mixkit.co/videos/preview/mixkit-woman-talking-into-a-podcast-microphone-42477-large.mp4"
-  ];
-  
-  // Current video source index
-  const [currentSourceIndex, setCurrentSourceIndex] = useState(0);
-
-  // Handle video load error
-  const handleVideoError = () => {
-    if (currentSourceIndex < videoSources.length - 1) {
-      // Try next video source
-      setCurrentSourceIndex(prevIndex => prevIndex + 1);
-    } else {
-      // All sources failed
-      setVideoError(true);
-      console.error("All video sources failed to load");
-    }
-  };
+  // Load the Vimeo player script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://player.vimeo.com/api/player.js";
+    script.async = true;
+    document.body.appendChild(script);
+    
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   return (
     <section className="relative w-full overflow-hidden">
-      {/* Video Background */}
+      {/* Video Background using Vimeo Embed */}
       <div className="absolute inset-0 w-full h-full">
-        <video 
-          className="object-cover w-full h-full"
-          autoPlay 
-          muted 
-          loop 
-          playsInline
-          onLoadedData={() => setIsVideoLoaded(true)}
-          onError={handleVideoError}
-        >
-          <source src={videoSources[currentSourceIndex]} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        <div style={{ padding: '56.25% 0 0 0', position: 'relative' }}>
+          <iframe 
+            src="https://player.vimeo.com/video/1075997899?h=d409319f4a&background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} 
+            frameBorder="0" 
+            allow="autoplay; fullscreen; picture-in-picture" 
+            allowFullScreen
+            onLoad={() => setIsIframeLoaded(true)}
+          ></iframe>
+        </div>
         
         {/* Dark Overlay - increased opacity for better text visibility */}
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
         
-        {/* Fallback image if video fails */}
-        {videoError && (
+        {/* Fallback gradient if iframe fails */}
+        {!isIframeLoaded && (
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-purple-900"></div>
         )}
       </div>
