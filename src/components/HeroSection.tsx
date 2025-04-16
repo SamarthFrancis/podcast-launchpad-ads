@@ -10,6 +10,7 @@ const HeroSection: React.FC = () => {
 
   // Video sources to try
   const videoSources = [
+    "https://vimeo.com/1075997899/d409319f4a?share=copy", // Primary source - user provided Vimeo link
     "https://cdn.pixabay.com/vimeo/506768775/podcast-70809.mp4?width=1280&hash=0c81ac75aa0e7634a85a7848e5e3412b777e17aa",
     "https://cdn.coverr.co/videos/coverr-woman-recording-podcast-in-a-studio-5085/1080p.mp4",
     "https://assets.mixkit.co/videos/preview/mixkit-woman-talking-into-a-podcast-microphone-42477-large.mp4"
