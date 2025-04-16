@@ -1,66 +1,145 @@
-import React from 'react';
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
-import { Music, Headphones, Youtube } from 'lucide-react';
+
+import React, { useEffect, useRef } from 'react';
+import { Apple, Music, Youtube, Headphones, Rss, Radio, BookOpen } from 'lucide-react';
 
 const DistributionSection: React.FC = () => {
-  // Platform logos with icons and names
+  // Platform logos with icons
   const platforms = [
-    { name: "Apple Podcasts", logo: <Headphones className="h-8 w-8" /> },
+    { name: "Apple Podcasts", logo: <Apple className="h-8 w-8" /> },
     { name: "Spotify", logo: <Music className="h-8 w-8" /> }, 
-    { name: "Amazon Music", logo: "🎵" },
     { name: "YouTube", logo: <Youtube className="h-8 w-8" /> },
-    { name: "Podcast Index", logo: "🎙️" },
-    { name: "iHeartRadio", logo: "📻" },
-    { name: "Overcast", logo: "🎧" },
-    { name: "Castbox", logo: "📱" },
-    { name: "Podcast Addict", logo: "🎮" },
-    { name: "Pocket Casts", logo: "📻" },
-    { name: "Pandora", logo: "🔊" },
+    { name: "Amazon Music", logo: <Headphones className="h-8 w-8" /> },
+    { name: "JioSaavn", logo: <Music className="h-8 w-8" /> },
+    { name: "Audible", logo: <BookOpen className="h-8 w-8" /> },
+    { name: "Castbox", logo: <Radio className="h-8 w-8" /> },
+    { name: "Podcast Index", logo: <Rss className="h-8 w-8" /> },
+    { name: "Google Podcasts", logo: <Headphones className="h-8 w-8" /> },
+    { name: "Pocket Casts", logo: <Radio className="h-8 w-8" /> },
+    { name: "Pandora", logo: <Music className="h-8 w-8" /> },
+    { name: "iHeartRadio", logo: <Radio className="h-8 w-8" /> },
+    { name: "Overcast", logo: <Headphones className="h-8 w-8" /> },
   ];
-
+  
+  // Double the platforms array for seamless looping
+  const allPlatforms = [...platforms, ...platforms];
+  
+  // Refs for animation control
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  
+  // Auto-scroll animation
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    const scrollContent = scrollRef.current;
+    
+    if (!scrollContainer || !scrollContent) return;
+    
+    let animationId: number;
+    let isPaused = false;
+    let scrollPosition = 0;
+    const speed = 0.5; // Pixels per frame
+    
+    const scroll = () => {
+      if (!isPaused) {
+        scrollPosition += speed;
+        
+        // Reset position for seamless loop when first set of logos is out of view
+        if (scrollPosition >= scrollContent.clientWidth / 2) {
+          scrollPosition = 0;
+        }
+        
+        scrollContainer.scrollLeft = scrollPosition;
+      }
+      animationId = requestAnimationFrame(scroll);
+    };
+    
+    // Start animation
+    animationId = requestAnimationFrame(scroll);
+    
+    // Pause on hover
+    const handleMouseEnter = () => { isPaused = true; };
+    const handleMouseLeave = () => { isPaused = false; };
+    
+    scrollContainer.addEventListener('mouseenter', handleMouseEnter);
+    scrollContainer.addEventListener('mouseleave', handleMouseLeave);
+    
+    // Clean up
+    return () => {
+      cancelAnimationFrame(animationId);
+      scrollContainer.removeEventListener('mouseenter', handleMouseEnter);
+      scrollContainer.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+  
   return (
-    <section className="py-24 px-4 bg-white text-[#111827]">
+    <section className="py-20 px-4 bg-white text-[#111827]">
       <div className="container mx-auto text-center">
         <h2 className="font-jakarta font-bold text-4xl md:text-5xl mb-6 text-[#4F46E5]">
           Your Podcast. Everywhere It Matters.
         </h2>
-        <p className="font-manrope text-xl text-[#4B5563] mb-4 max-w-4xl mx-auto">
-          We distribute your podcast to 20+ platforms, including Spotify, Apple Podcasts, YouTube, and more.
+        <p className="font-manrope text-xl text-[#4B5563] mb-12 max-w-4xl mx-auto">
+          We distribute your podcast to 20+ platforms — including Spotify, Apple Podcasts, YouTube, Amazon Music, JioSaavn, and more.
         </p>
         
-        {/* Removed the "Trusted by over 30,000+ creators and brands" line */}
-        
-        {/* Responsive desktop display for larger screens */}
-        <div className="hidden md:grid grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
-          {platforms.slice(0, 10).map((platform, index) => (
-            <div 
-              key={index} 
-              className="bg-white rounded-xl py-6 px-4 flex flex-col items-center justify-center gap-3 transition-transform hover:scale-105 shadow-sm border border-gray-100"
-            >
-              <div className="text-3xl text-[#4F46E5]">{typeof platform.logo === 'string' ? platform.logo : React.cloneElement(platform.logo, { className: 'h-8 w-8 text-[#4F46E5]' })}</div>
-              <span className="font-medium text-[#4B5563]">{platform.name}</span>
-            </div>
-          ))}
+        {/* Trusted badge */}
+        <div className="mb-10">
+          <span className="inline-block bg-gray-100 text-[#4B5563] px-6 py-2 rounded-full font-medium">
+            Trusted by 30,000+ creators worldwide
+          </span>
         </div>
         
-        {/* Mobile carousel for smaller screens */}
-        <div className="md:hidden">
-          <Carousel className="w-full">
-            <CarouselContent>
-              {platforms.map((platform, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                  <div className="bg-white rounded-xl py-6 px-4 flex flex-col items-center justify-center gap-3 h-full shadow-sm border border-gray-100">
-                    <div className="text-3xl text-[#4F46E5]">{typeof platform.logo === 'string' ? platform.logo : React.cloneElement(platform.logo, { className: 'h-8 w-8 text-[#4F46E5]' })}</div>
-                    <span className="font-medium text-[#4B5563]">{platform.name}</span>
+        {/* Auto-scrolling logo carousel - Desktop */}
+        <div className="hidden md:block overflow-hidden">
+          <div 
+            ref={scrollContainerRef}
+            className="overflow-x-scroll scrollbar-hide" 
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            <div 
+              ref={scrollRef}
+              className="inline-flex gap-12 py-4"
+            >
+              {allPlatforms.map((platform, index) => (
+                <div 
+                  key={index} 
+                  className="flex flex-col items-center justify-center min-w-[120px] transition-transform hover:scale-110"
+                >
+                  <div className="text-[#4F46E5] mb-3 p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    {typeof platform.logo === 'string' ? platform.logo : React.cloneElement(platform.logo, { className: 'h-10 w-10 text-[#4F46E5]' })}
                   </div>
-                </CarouselItem>
+                  <span className="font-medium text-[#4B5563]">{platform.name}</span>
+                </div>
               ))}
-            </CarouselContent>
-            <CarouselPrevious className="left-2 bg-white hover:bg-gray-50 text-[#4F46E5] border-[#4F46E5]" />
-            <CarouselNext className="right-2 bg-white hover:bg-gray-50 text-[#4F46E5] border-[#4F46E5]" />
-          </Carousel>
+            </div>
+          </div>
+        </div>
+        
+        {/* Mobile carousel - Simple scrollable row */}
+        <div className="md:hidden">
+          <div className="overflow-x-auto pb-6 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            <div className="inline-flex gap-6">
+              {platforms.map((platform, index) => (
+                <div 
+                  key={index} 
+                  className="flex flex-col items-center justify-center min-w-[100px]"
+                >
+                  <div className="text-[#4F46E5] mb-2 p-3 bg-white rounded-lg shadow-sm">
+                    {typeof platform.logo === 'string' ? platform.logo : React.cloneElement(platform.logo, { className: 'h-8 w-8 text-[#4F46E5]' })}
+                  </div>
+                  <span className="font-medium text-sm text-[#4B5563]">{platform.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
+      
+      {/* Custom CSS for scrollbar hiding */}
+      <style jsx>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </section>
   );
 };
