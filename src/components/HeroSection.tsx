@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Mic, Radio, Headphones, Music, Waveform } from 'lucide-react';
+import { Mic, Radio, Headphones, Music, WaveformCircle } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   return (
@@ -36,12 +36,12 @@ const HeroSection: React.FC = () => {
             
             {/* Orbiting elements */}
             <div className="absolute w-full h-full">
-              {/* Waveform icon orbit */}
+              {/* WaveformCircle icon orbit */}
               <div className="absolute inset-0 flex justify-center items-center">
                 <div className="animate-spin-slow relative w-[250px] h-[250px] rounded-full border border-dashed border-primary/30">
                   <div className="absolute -top-5 transform -translate-x-1/2">
                     <div className="bg-white/80 p-3 rounded-full shadow-lg">
-                      <Waveform className="h-6 w-6 text-primary" />
+                      <WaveformCircle className="h-6 w-6 text-primary" />
                     </div>
                   </div>
                 </div>
