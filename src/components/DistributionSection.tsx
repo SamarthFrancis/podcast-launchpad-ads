@@ -134,8 +134,8 @@ const DistributionSection: React.FC = () => {
         </div>
       </div>
       
-      {/* Custom CSS for scrollbar hiding */}
-      <style jsx>{`
+      {/* Custom CSS for scrollbar hiding - Fix by removing the jsx property */}
+      <style>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
         }
