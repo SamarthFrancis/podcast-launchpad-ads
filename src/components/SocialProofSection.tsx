@@ -1,9 +1,24 @@
 
 import React from 'react';
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import { Star } from 'lucide-react';
 
 const SocialProofSection: React.FC = () => {
+  const logos = [
+    { name: "Meta", textLogo: true },
+    { name: "Audible", textLogo: true },
+    { name: "Himalay's", textLogo: true },
+    { name: "Ashiana", textLogo: true },
+    { name: "ANI News", textLogo: true },
+    { name: "Juggernaut", textLogo: true },
+    { name: "The Life Saver Show", textLogo: false },
+    { name: "BBC", textLogo: true },
+    { name: "The Money Wise Podcast", textLogo: false },
+    { name: "Radio City", textLogo: true },
+    { name: "The Smiling Souls", textLogo: false },
+    { name: "Rosewood", textLogo: true }
+  ];
+
   const reviews = [
     {
       text: "This platform revolutionized our podcast reach. We went from 500 to 15,000 monthly listeners in just 8 weeks!",
@@ -25,19 +40,26 @@ const SocialProofSection: React.FC = () => {
   return (
     <section className="py-20 px-4 bg-gray-50">
       <div className="container mx-auto">
-        <h2 className="font-jakarta font-bold text-3xl md:text-4xl mb-12 text-center text-dark">
-          Loved by Creators Worldwide
-        </h2>
+        <div className="text-center mb-12">
+          <h2 className="font-jakarta font-bold text-3xl md:text-4xl mb-3 text-dark">
+            Loved by Creators Worldwide
+          </h2>
+          <p className="font-manrope text-lg text-gray max-w-2xl mx-auto">
+            From global giants to indie voices — thousands of creators trust us to get their podcast heard.
+          </p>
+        </div>
         
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-16">
-          {Array(8).fill(null).map((_, index) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mb-16">
+          {logos.map((logo, index) => (
             <div 
               key={index} 
-              className="bg-white rounded-lg p-4 shadow-sm aspect-square flex items-center justify-center overflow-hidden"
+              className="bg-white rounded-lg p-4 shadow-sm aspect-square flex items-center justify-center overflow-hidden transition-all hover:shadow-md"
             >
-              <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-lg font-bold text-gray-400">
-                {index + 1}
-              </div>
+              {logo.textLogo ? (
+                <div className="text-lg md:text-xl font-bold text-gray-800">{logo.name}</div>
+              ) : (
+                <div className="text-sm md:text-base font-medium text-center text-gray-700">{logo.name}</div>
+              )}
             </div>
           ))}
         </div>
@@ -47,7 +69,7 @@ const SocialProofSection: React.FC = () => {
             <div className="text-dark font-bold mb-2">Capterra</div>
             <div className="flex text-yellow-400">
               {Array(5).fill(null).map((_, i) => (
-                <Star key={i} fill="currentColor" className="h-5 w-5" />
+                <Star key={i} fill="currentColor" size={20} className={i === 4 ? "text-yellow-200" : ""} />
               ))}
               <span className="text-dark ml-2 font-medium">4.8</span>
             </div>
@@ -57,7 +79,7 @@ const SocialProofSection: React.FC = () => {
             <div className="text-dark font-bold mb-2">GetApp</div>
             <div className="flex text-yellow-400">
               {Array(5).fill(null).map((_, i) => (
-                <Star key={i} fill="currentColor" className="h-5 w-5" />
+                <Star key={i} fill="currentColor" size={20} />
               ))}
               <span className="text-dark ml-2 font-medium">4.9</span>
             </div>
@@ -67,31 +89,39 @@ const SocialProofSection: React.FC = () => {
             <div className="text-dark font-bold mb-2">G2</div>
             <div className="flex text-yellow-400">
               {Array(5).fill(null).map((_, i) => (
-                <Star key={i} fill="currentColor" className="h-5 w-5" />
+                <Star key={i} fill="currentColor" size={20} />
               ))}
               <span className="text-dark ml-2 font-medium">4.7</span>
             </div>
           </div>
         </div>
         
-        <Carousel className="max-w-2xl mx-auto">
-          <CarouselContent>
-            {reviews.map((review, index) => (
-              <CarouselItem key={index}>
-                <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100">
-                  <p className="font-manrope text-lg mb-6 italic">"{review.text}"</p>
-                  <div className="flex items-center">
-                    <div className="h-10 w-10 rounded-full bg-gray-200 mr-3"></div>
-                    <div>
-                      <p className="font-jakarta font-medium">{review.author}</p>
-                      <p className="text-gray text-sm">{review.role}</p>
+        <div className="relative max-w-2xl mx-auto">
+          <Carousel className="w-full">
+            <CarouselContent>
+              {reviews.map((review, index) => (
+                <CarouselItem key={index}>
+                  <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100">
+                    <p className="font-manrope text-lg mb-6 italic">"{review.text}"</p>
+                    <div className="flex items-center">
+                      <div className="h-10 w-10 rounded-full bg-gray-200 mr-3 flex items-center justify-center font-bold text-gray-500">
+                        {review.author.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="font-jakarta font-medium">{review.author}</p>
+                        <p className="text-gray text-sm">{review.role}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex justify-center gap-2 mt-4">
+              <CarouselPrevious className="static transform-none mx-1 rounded-full h-8 w-8" />
+              <CarouselNext className="static transform-none mx-1 rounded-full h-8 w-8" />
+            </div>
+          </Carousel>
+        </div>
       </div>
     </section>
   );
