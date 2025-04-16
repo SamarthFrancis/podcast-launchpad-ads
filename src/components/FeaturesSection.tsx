@@ -1,11 +1,11 @@
 
 import React from 'react';
-import { FileAudio, Robot, Globe, Share2, Users, Lock } from 'lucide-react';
+import { Bot, FileAudio, Globe, Share2, Users, Lock } from 'lucide-react';
 
 const FeaturesSection: React.FC = () => {
   const features = [
     {
-      icon: <Robot className="h-6 w-6" />,
+      icon: <Bot className="h-6 w-6" />,
       title: "AI-Powered Transcript & SEO Tools",
       description: "Automatically generate transcripts and optimize SEO"
     },
