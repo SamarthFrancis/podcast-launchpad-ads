@@ -1,13 +1,13 @@
 
 import React from 'react';
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import { Apple, Spotify, Youtube } from 'lucide-react';
+import { Music, Headphones, Youtube } from 'lucide-react';
 
 const DistributionSection: React.FC = () => {
   // Platform logos with icons and names
   const platforms = [
-    { name: "Apple Podcasts", logo: <Apple className="h-8 w-8" /> },
-    { name: "Spotify", logo: <Spotify className="h-8 w-8" /> }, 
+    { name: "Apple Podcasts", logo: <Headphones className="h-8 w-8" /> },
+    { name: "Spotify", logo: <Music className="h-8 w-8" /> }, 
     { name: "Amazon Music", logo: "🎵" },
     { name: "YouTube", logo: <Youtube className="h-8 w-8" /> },
     { name: "Podcast Index", logo: "🎙️" },
@@ -83,7 +83,7 @@ const DistributionSection: React.FC = () => {
           {/* Spotify */}
           <div className="flex flex-col items-center">
             <div className="flex items-center gap-2 mb-2">
-              <Spotify className="h-6 w-6" />
+              <Music className="h-6 w-6" />
               <span className="font-medium">Spotify</span>
             </div>
             <div className="bg-[#222222] rounded-xl p-3 h-60 w-full max-w-[220px]">
@@ -94,7 +94,7 @@ const DistributionSection: React.FC = () => {
           {/* Apple Podcasts */}
           <div className="flex flex-col items-center">
             <div className="flex items-center gap-2 mb-2">
-              <Apple className="h-6 w-6" />
+              <Headphones className="h-6 w-6" />
               <span className="font-medium">Apple Podcasts</span>
             </div>
             <div className="bg-[#222222] rounded-xl p-3 h-60 w-full max-w-[220px]">
