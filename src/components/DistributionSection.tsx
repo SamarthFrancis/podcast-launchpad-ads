@@ -1,57 +1,116 @@
 
 import React from 'react';
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { Apple, Spotify, Youtube } from 'lucide-react';
 
 const DistributionSection: React.FC = () => {
-  // Platform logos
+  // Platform logos with icons and names
   const platforms = [
-    { name: "Spotify", logo: "🎧" },
-    { name: "Apple Podcasts", logo: "🍎" }, 
+    { name: "Apple Podcasts", logo: <Apple className="h-8 w-8" /> },
+    { name: "Spotify", logo: <Spotify className="h-8 w-8" /> }, 
     { name: "Amazon Music", logo: "🎵" },
-    { name: "YouTube", logo: "▶️" },
-    { name: "JioSaavn", logo: "🎶" },
-    { name: "Audible", logo: "📚" },
-    { name: "Google Podcasts", logo: "🎙️" },
-    { name: "Stitcher", logo: "🔊" }
+    { name: "YouTube", logo: <Youtube className="h-8 w-8" /> },
+    { name: "Podcast Index", logo: "🎙️" },
+    { name: "iHeartRadio", logo: "📻" },
+    { name: "Overcast", logo: "🎧" },
+    { name: "Castbox", logo: "📱" },
+    { name: "Podcast Addict", logo: "🎮" },
+    { name: "Pocket Casts", logo: "📻" },
+    { name: "Pandora", logo: "🔊" },
   ];
 
   return (
-    <section className="py-20 px-4 bg-white">
+    <section className="py-24 px-4 bg-[#111111] text-white">
       <div className="container mx-auto text-center">
-        <h2 className="font-jakarta font-bold text-3xl md:text-4xl mb-4 text-dark">
-          Your Podcast. Everywhere It Matters.
+        <h2 className="font-jakarta font-bold text-4xl md:text-5xl mb-6 text-white">
+          Get listed in the top podcast directories
         </h2>
-        <p className="font-manrope text-lg text-gray mb-12 max-w-2xl mx-auto">
-          Trusted by 30,000+ creators to reach millions.
+        <p className="font-manrope text-xl text-gray-300 mb-12 max-w-4xl mx-auto">
+          Reach millions of listeners by listing your podcast in Apple Podcasts, Spotify, Podcast Index, 
+          Amazon Music, YouTube, and all of the <span className="underline">podcast directories</span>.
         </p>
         
-        <Carousel 
-          className="w-full max-w-4xl mx-auto" 
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-        >
-          <CarouselContent className="-ml-2 md:-ml-4">
-            {platforms.map((platform, index) => (
-              <CarouselItem key={index} className="pl-2 md:pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4">
-                <div className="bg-gray-50 h-24 rounded-xl flex flex-col items-center justify-center p-4 border border-gray-100 transition-all hover:shadow-md hover:scale-105">
-                  <div className="text-3xl mb-1">{platform.logo}</div>
-                  <p className="font-medium text-sm">{platform.name}</p>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
+        {/* Top row of platforms */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-6">
+          {platforms.slice(0, 5).map((platform, index) => (
+            <div 
+              key={index} 
+              className="bg-[#222222] rounded-xl py-3 px-4 flex items-center justify-center gap-2"
+            >
+              <div className="text-2xl">{typeof platform.logo === 'string' ? platform.logo : platform.logo}</div>
+              <span className="font-medium text-sm whitespace-nowrap">{platform.name}</span>
+            </div>
+          ))}
+        </div>
         
-        <div className="flex justify-center mt-8">
-          <div className="inline-flex gap-1.5">
-            {[0, 1, 2].map((_, i) => (
-              <div 
-                key={i} 
-                className={`h-2 rounded-full transition-all ${i === 0 ? 'w-6 bg-primary' : 'w-2 bg-gray-200'}`}
-              ></div>
-            ))}
+        {/* Second row with fewer platforms */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+          {platforms.slice(5, 9).map((platform, index) => (
+            <div 
+              key={index} 
+              className="bg-[#222222] rounded-xl py-3 px-4 flex items-center justify-center gap-2"
+            >
+              <div className="text-2xl">{typeof platform.logo === 'string' ? platform.logo : platform.logo}</div>
+              <span className="font-medium text-sm whitespace-nowrap">{platform.name}</span>
+            </div>
+          ))}
+        </div>
+        
+        {/* Mobile device mockups */}
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-5 gap-6">
+          {/* Amazon Music */}
+          <div className="flex flex-col items-center">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-2xl">🎵</span>
+              <span className="font-medium">Amazon Music</span>
+            </div>
+            <div className="bg-[#222222] rounded-xl p-3 h-60 w-full max-w-[220px]">
+              <div className="h-full w-full bg-gray-800 rounded-lg"></div>
+            </div>
+          </div>
+          
+          {/* Overcast */}
+          <div className="flex flex-col items-center">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-2xl">🎧</span>
+              <span className="font-medium">Overcast</span>
+            </div>
+            <div className="bg-[#222222] rounded-xl p-3 h-60 w-full max-w-[220px]">
+              <div className="h-full w-full bg-gray-800 rounded-lg"></div>
+            </div>
+          </div>
+          
+          {/* Spotify */}
+          <div className="flex flex-col items-center">
+            <div className="flex items-center gap-2 mb-2">
+              <Spotify className="h-6 w-6" />
+              <span className="font-medium">Spotify</span>
+            </div>
+            <div className="bg-[#222222] rounded-xl p-3 h-60 w-full max-w-[220px]">
+              <div className="h-full w-full bg-purple-900 rounded-lg"></div>
+            </div>
+          </div>
+          
+          {/* Apple Podcasts */}
+          <div className="flex flex-col items-center">
+            <div className="flex items-center gap-2 mb-2">
+              <Apple className="h-6 w-6" />
+              <span className="font-medium">Apple Podcasts</span>
+            </div>
+            <div className="bg-[#222222] rounded-xl p-3 h-60 w-full max-w-[220px]">
+              <div className="h-full w-full bg-gray-800 rounded-lg"></div>
+            </div>
+          </div>
+          
+          {/* iHeartRadio */}
+          <div className="flex flex-col items-center">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-2xl">📻</span>
+              <span className="font-medium">iHeartRadio</span>
+            </div>
+            <div className="bg-[#222222] rounded-xl p-3 h-60 w-full max-w-[220px]">
+              <div className="h-full w-full bg-gray-800 rounded-lg"></div>
+            </div>
           </div>
         </div>
       </div>
