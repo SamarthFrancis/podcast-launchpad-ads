@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   Card, 
@@ -18,10 +17,8 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 
-// Define the possible card types 
 type CardType = 'review' | 'guide' | 'artwork' | 'achievement' | 'promo' | 'social';
 
-// Define the structure for our content cards
 interface ContentCard {
   id: string;
   type: CardType;
@@ -42,7 +39,6 @@ interface ContentCard {
 const CreatorReviewSection: React.FC = () => {
   const [filter, setFilter] = useState<string>("all");
 
-  // Sample content cards based on the reference image
   const contentCards: ContentCard[] = [
     {
       id: '1',
@@ -82,7 +78,7 @@ const CreatorReviewSection: React.FC = () => {
       type: 'achievement',
       title: "Share your latest achievement",
       subtext: "Congrats from",
-      badge: "Buzzsprout",
+      badge: "Creators Network",
       image: "public/lovable-uploads/09729a1b-2be1-4a1c-a14c-b37b86e3c68c.png",
     },
     {
@@ -121,12 +117,10 @@ const CreatorReviewSection: React.FC = () => {
     },
   ];
 
-  // Filter cards based on selected filter
   const filteredCards = filter === 'all' 
     ? contentCards 
     : contentCards.filter(card => card.type === filter);
 
-  // Get background color based on color scheme
   const getColorScheme = (scheme?: string) => {
     switch(scheme) {
       case 'green': return 'bg-[#8EB443] text-white';
@@ -138,7 +132,6 @@ const CreatorReviewSection: React.FC = () => {
     }
   };
 
-  // Render the appropriate card content based on card type
   const renderCardContent = (card: ContentCard) => {
     switch(card.type) {
       case 'social':
@@ -258,12 +251,11 @@ const CreatorReviewSection: React.FC = () => {
             <span className="text-primary"> video tutorials</span>, 
             <span className="text-primary"> courses</span>, 
             <span className="text-primary"> industry podcasts</span>, and the 
-            <span className="text-primary"> Buzzsprout Podcast Community</span>, 
+            <span className="text-primary"> Creator Community</span>, 
             you'll have everything you need to launch a successful podcast.
           </p>
         </div>
         
-        {/* Filter Toggle */}
         <div className="flex justify-center mb-8">
           <ToggleGroup 
             type="single" 
@@ -289,7 +281,6 @@ const CreatorReviewSection: React.FC = () => {
           </ToggleGroup>
         </div>
         
-        {/* Mobile: Horizontal Scrolling Cards */}
         <div className="md:hidden">
           <ScrollArea className="w-full whitespace-nowrap pb-4">
             <div className="flex gap-4 px-4 pb-4">
@@ -302,7 +293,6 @@ const CreatorReviewSection: React.FC = () => {
           </ScrollArea>
         </div>
         
-        {/* Tablet/Desktop: Grid Layout */}
         <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredCards.map((card) => (
             <div 
