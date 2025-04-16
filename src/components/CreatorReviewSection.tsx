@@ -2,18 +2,24 @@
 import React, { useState } from 'react';
 import { 
   Card, 
-  CardContent, 
-  CardFooter, 
+  CardContent,
+  CardFooter,
   CardHeader 
 } from "@/components/ui/card";
-import { Facebook, Instagram, Quote, BookOpen, Award, Star, MessageCircle } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import { Facebook, Instagram, ArrowRight, BookOpen, Award, Star, MessageCircle, Mic } from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 
 // Define the possible card types 
-type CardType = 'review' | 'guide' | 'artwork' | 'achievement' | 'promo';
+type CardType = 'review' | 'guide' | 'artwork' | 'achievement' | 'promo' | 'social';
 
 // Define the structure for our content cards
 interface ContentCard {
@@ -29,91 +35,89 @@ interface ContentCard {
     icon: React.ReactNode;
   };
   badge?: string;
+  highlight?: boolean;
+  colorScheme?: 'green' | 'blue' | 'purple' | 'pink' | 'yellow';
 }
 
 const CreatorReviewSection: React.FC = () => {
   const [filter, setFilter] = useState<string>("all");
 
-  // Sample content cards - these would be replaced with real data
+  // Sample content cards based on the reference image
   const contentCards: ContentCard[] = [
     {
       id: '1',
-      type: 'review',
-      title: "This platform changed our podcast growth trajectory",
-      quote: "We went from 500 to 15,000 monthly listeners in just 8 weeks using the distribution tools!",
-      author: "Sarah Miller, Business Growth Show",
+      type: 'guide',
+      title: "HOW TO START A PODCAST",
+      image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+      colorScheme: 'green',
+      highlight: true
+    },
+    {
+      id: '2',
+      type: 'artwork',
+      title: "ROOKIE MOVE",
+      subtext: "Podcast featuring new creators",
+      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+      colorScheme: 'pink',
+    },
+    {
+      id: '3',
+      type: 'promo',
+      title: "FILE",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+      colorScheme: 'blue',
+    },
+    {
+      id: '4',
+      type: 'social',
+      title: "It's an awesome feeling to see your podcast grow and develop listeners all around the world. Thanks for all your help and support.",
+      author: "Jagrit Singh",
       platform: {
         name: "Facebook",
         icon: <Facebook className="h-4 w-4" />
       }
     },
     {
-      id: '2',
-      type: 'guide',
-      title: "How to Start a Podcast in 2025",
-      subtext: "Complete beginner's guide with equipment recommendations",
-      image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-      badge: "Popular Guide"
-    },
-    {
-      id: '3',
-      type: 'artwork',
-      title: "Featured Podcast",
-      subtext: "The Tech Insider",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    },
-    {
-      id: '4',
-      type: 'review',
-      title: "Our audience growth has been incredible",
-      quote: "The analytics alone are worth the price. Finally understanding our audience changed everything.",
-      author: "David Chen, History Untold",
-      platform: {
-        name: "Instagram",
-        icon: <Instagram className="h-4 w-4" />
-      }
-    },
-    {
       id: '5',
       type: 'achievement',
-      title: "1M+ Downloads Milestone",
-      subtext: "Achieved by podcasts using our platform in 2024",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-      badge: "Achievement"
+      title: "Share your latest achievement",
+      subtext: "Congrats from",
+      badge: "Buzzsprout",
+      image: "public/lovable-uploads/09729a1b-2be1-4a1c-a14c-b37b86e3c68c.png",
     },
     {
       id: '6',
-      type: 'promo',
-      title: "Grow Your Podcast Audience",
-      subtext: "Learn how to expand your reach across all major platforms",
-      image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-      badge: "Resource"
+      type: 'social',
+      title: "A word of thanks to Buzzsprout. I listened to your 7 part course and followed the advice. I launched my preview episode 3 weeks ago, and launched three proper episodes last week. Two days ago, we broke into the Top 100 Business Podcasts, and Top 10 in the UK Podcast Charts (Employment Law Matters).",
+      author: "Daniel Barnett",
+      platform: {
+        name: "Facebook",
+        icon: <Facebook className="h-4 w-4" />
+      }
     },
     {
       id: '7',
-      type: 'review',
-      title: "Simplified our workflow immensely",
-      quote: "I was spending 6 hours per week on distribution. Now it's 10 minutes. The ROI is incredible.",
-      author: "Mike Johnson, The Tech Insider Podcast",
-      platform: {
-        name: "G2",
-        icon: <Star className="h-4 w-4" />
-      }
+      type: 'promo',
+      title: "GROW YOUR PODCAST",
+      image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+      colorScheme: 'pink',
     },
     {
       id: '8',
       type: 'guide',
-      title: "Podcast Monetization Strategies",
-      subtext: "5 proven methods to generate revenue from your podcast",
+      title: "LEARN TO PODCAST 2021",
+      subtext: "Complete guide for beginners",
       image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-      badge: "Guide"
+      colorScheme: 'blue',
     },
     {
       id: '9',
       type: 'artwork',
-      title: "Trending Now",
-      subtext: "Money Matters Podcast",
+      title: "Q&A PODCASTING",
+      subtext: "Your questions answered",
       image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+      colorScheme: 'blue',
+      highlight: true,
     },
   ];
 
@@ -122,118 +126,122 @@ const CreatorReviewSection: React.FC = () => {
     ? contentCards 
     : contentCards.filter(card => card.type === filter);
 
+  // Get background color based on color scheme
+  const getColorScheme = (scheme?: string) => {
+    switch(scheme) {
+      case 'green': return 'bg-[#8EB443] text-white';
+      case 'blue': return 'bg-[#3EBFE0] text-white';
+      case 'purple': return 'bg-[#7C3AED] text-white';
+      case 'pink': return 'bg-[#FF5BA8] text-white';
+      case 'yellow': return 'bg-[#FFD166] text-black';
+      default: return 'bg-white';
+    }
+  };
+
   // Render the appropriate card content based on card type
   const renderCardContent = (card: ContentCard) => {
     switch(card.type) {
-      case 'review':
+      case 'social':
         return (
-          <div className="h-full flex flex-col justify-between">
-            <CardHeader className="pb-2">
-              <div className="flex items-start">
-                <Quote className="h-5 w-5 text-primary mr-2 flex-shrink-0 mt-1" />
-                <h3 className="font-jakarta font-bold text-lg">{card.title}</h3>
-              </div>
-            </CardHeader>
-            <CardContent className="pb-2">
-              <p className="font-manrope text-gray italic">"{card.quote}"</p>
-            </CardContent>
-            <CardFooter className="pt-2 flex flex-col items-start">
-              <p className="text-sm text-muted-foreground font-manrope">{card.author}</p>
+          <div className="h-full flex flex-col justify-between p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+            <div className="pb-2">
+              <p className="font-manrope text-gray-700">{card.title}</p>
+            </div>
+            <div className="pt-2 flex flex-col items-start">
+              <p className="text-sm text-muted-foreground font-manrope font-medium">{card.author}</p>
               {card.platform && (
                 <div className="flex items-center mt-2 text-xs text-muted-foreground">
                   {card.platform.icon}
                   <span className="ml-1">{card.platform.name}</span>
                 </div>
               )}
-            </CardFooter>
+            </div>
           </div>
         );
         
       case 'guide':
       case 'promo':
         return (
-          <div className="h-full relative flex flex-col">
-            <div className="relative h-40 rounded-t-lg overflow-hidden">
+          <div className={`h-full relative flex flex-col overflow-hidden rounded-lg shadow-sm ${card.highlight ? 'border-2 border-primary' : 'border border-gray-100'}`}>
+            <div className={`relative h-full min-h-[280px] overflow-hidden ${getColorScheme(card.colorScheme)}`}>
               {card.image && (
-                <img 
-                  src={card.image} 
-                  alt={card.title} 
-                  className="w-full h-full object-cover"
-                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <img 
+                    src={card.image} 
+                    alt={card.title} 
+                    className="w-2/3 h-auto object-contain mix-blend-multiply"
+                  />
+                </div>
               )}
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <h3 className="font-jakarta font-bold text-2xl">{card.title}</h3>
+                {card.subtext && (
+                  <p className="text-sm mt-1">{card.subtext}</p>
+                )}
+              </div>
               {card.badge && (
-                <span className="absolute top-2 right-2 bg-primary text-white px-2 py-1 rounded-full text-xs font-bold">
+                <span className="absolute top-2 right-2 bg-white text-black px-2 py-1 rounded-full text-xs font-bold">
                   {card.badge}
                 </span>
               )}
             </div>
-            <CardHeader className="pb-2">
-              <div className="flex items-start">
-                <BookOpen className="h-5 w-5 text-primary mr-2 flex-shrink-0 mt-1" />
-                <h3 className="font-jakarta font-bold text-lg">{card.title}</h3>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p className="font-manrope text-gray">{card.subtext}</p>
-            </CardContent>
           </div>
         );
         
       case 'artwork':
         return (
-          <div className="h-full flex flex-col">
-            <div className="relative h-52 rounded-t-lg overflow-hidden">
+          <div className={`h-full relative flex flex-col overflow-hidden rounded-lg shadow-sm ${card.highlight ? 'border-2 border-primary' : 'border border-gray-100'}`}>
+            <div className={`relative h-full min-h-[280px] overflow-hidden ${getColorScheme(card.colorScheme)}`}>
               {card.image && (
-                <img 
-                  src={card.image} 
-                  alt={card.title} 
-                  className="w-full h-full object-cover"
-                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <img 
+                    src={card.image} 
+                    alt={card.title} 
+                    className="w-2/3 h-auto object-contain mix-blend-multiply"
+                  />
+                </div>
               )}
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <h3 className="font-jakarta font-bold text-2xl">{card.title}</h3>
+                {card.subtext && (
+                  <p className="text-sm mt-1">{card.subtext}</p>
+                )}
+              </div>
             </div>
-            <CardHeader className="pb-2">
-              <h3 className="font-jakarta font-bold text-lg">{card.title}</h3>
-            </CardHeader>
-            <CardContent>
-              <p className="font-manrope text-gray">{card.subtext}</p>
-            </CardContent>
           </div>
         );
         
       case 'achievement':
         return (
-          <div className="h-full flex flex-col">
-            <div className="relative h-40 rounded-t-lg overflow-hidden">
-              {card.image && (
+          <div className="h-full flex flex-col bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+            <div className="p-4">
+              <h3 className="font-jakarta font-bold text-xl text-gray-900">{card.title}</h3>
+              {card.subtext && (
+                <div className="flex items-center mt-2">
+                  <p className="font-manrope text-gray-600">{card.subtext}</p>
+                  {card.badge && (
+                    <span className="ml-1 font-bold text-primary">{card.badge}</span>
+                  )}
+                </div>
+              )}
+            </div>
+            {card.image && (
+              <div className="relative flex-1 flex items-center justify-center p-2 bg-gray-50">
                 <img 
                   src={card.image} 
                   alt={card.title} 
-                  className="w-full h-full object-cover"
+                  className="max-w-full h-auto object-contain"
                 />
-              )}
-              {card.badge && (
-                <span className="absolute top-2 right-2 bg-secondary text-white px-2 py-1 rounded-full text-xs font-bold">
-                  {card.badge}
-                </span>
-              )}
-            </div>
-            <CardHeader className="pb-2">
-              <div className="flex items-start">
-                <Award className="h-5 w-5 text-secondary mr-2 flex-shrink-0 mt-1" />
-                <h3 className="font-jakarta font-bold text-lg">{card.title}</h3>
               </div>
-            </CardHeader>
-            <CardContent>
-              <p className="font-manrope text-gray">{card.subtext}</p>
-            </CardContent>
+            )}
           </div>
         );
         
       default:
         return (
-          <CardContent>
+          <div className="p-4">
             <p>Invalid card type</p>
-          </CardContent>
+          </div>
         );
     }
   };
@@ -241,12 +249,17 @@ const CreatorReviewSection: React.FC = () => {
   return (
     <section className="py-16 px-4 bg-white">
       <div className="container mx-auto">
-        <div className="text-center mb-8">
-          <h2 className="font-jakarta font-bold text-4xl md:text-5xl mb-4 text-[#4F46E5]">
-            What Creators Are Saying & Learning
+        <div className="text-center mb-10">
+          <h2 className="font-jakarta font-bold text-4xl md:text-5xl mb-4 text-[#1C382E]">
+            Your guide to podcasting
           </h2>
-          <p className="font-manrope text-lg text-[#4B5563] max-w-2xl mx-auto">
-            Insights, stories, and resources from our global creator community
+          <p className="font-manrope text-lg text-[#4B5563] max-w-3xl mx-auto">
+            With our <span className="text-primary">step-by-step guides</span>, 
+            <span className="text-primary"> video tutorials</span>, 
+            <span className="text-primary"> courses</span>, 
+            <span className="text-primary"> industry podcasts</span>, and the 
+            <span className="text-primary"> Buzzsprout Podcast Community</span>, 
+            you'll have everything you need to launch a successful podcast.
           </p>
         </div>
         
@@ -261,17 +274,17 @@ const CreatorReviewSection: React.FC = () => {
             <ToggleGroupItem value="all" className="px-4 py-2 rounded-md data-[state=on]:bg-white data-[state=on]:shadow-sm">
               <span className="font-manrope">All</span>
             </ToggleGroupItem>
-            <ToggleGroupItem value="review" className="px-4 py-2 rounded-md data-[state=on]:bg-white data-[state=on]:shadow-sm">
-              <MessageCircle className="w-4 h-4 mr-1" />
-              <span className="font-manrope">Reviews</span>
-            </ToggleGroupItem>
             <ToggleGroupItem value="guide" className="px-4 py-2 rounded-md data-[state=on]:bg-white data-[state=on]:shadow-sm">
               <BookOpen className="w-4 h-4 mr-1" />
               <span className="font-manrope">Guides</span>
             </ToggleGroupItem>
-            <ToggleGroupItem value="achievement" className="px-4 py-2 rounded-md data-[state=on]:bg-white data-[state=on]:shadow-sm">
-              <Award className="w-4 h-4 mr-1" />
-              <span className="font-manrope">Featured</span>
+            <ToggleGroupItem value="social" className="px-4 py-2 rounded-md data-[state=on]:bg-white data-[state=on]:shadow-sm">
+              <MessageCircle className="w-4 h-4 mr-1" />
+              <span className="font-manrope">Social</span>
+            </ToggleGroupItem>
+            <ToggleGroupItem value="artwork" className="px-4 py-2 rounded-md data-[state=on]:bg-white data-[state=on]:shadow-sm">
+              <Mic className="w-4 h-4 mr-1" />
+              <span className="font-manrope">Podcasts</span>
             </ToggleGroupItem>
           </ToggleGroup>
         </div>
@@ -281,22 +294,8 @@ const CreatorReviewSection: React.FC = () => {
           <ScrollArea className="w-full whitespace-nowrap pb-4">
             <div className="flex gap-4 px-4 pb-4">
               {filteredCards.map((card) => (
-                <div key={card.id} className="w-[280px] flex-shrink-0">
-                  <HoverCard>
-                    <HoverCardTrigger asChild>
-                      <Card className="h-full overflow-hidden transition-all duration-300 hover:shadow-md hover:scale-[1.02]">
-                        {renderCardContent(card)}
-                      </Card>
-                    </HoverCardTrigger>
-                    <HoverCardContent className="w-80">
-                      <div className="flex justify-between space-x-4">
-                        <div>
-                          <h4 className="font-jakarta font-bold">{card.title}</h4>
-                          <p className="text-sm text-muted-foreground">{card.subtext || card.author}</p>
-                        </div>
-                      </div>
-                    </HoverCardContent>
-                  </HoverCard>
+                <div key={card.id} className="w-[280px] h-[280px] flex-shrink-0">
+                  {renderCardContent(card)}
                 </div>
               ))}
             </div>
@@ -306,15 +305,14 @@ const CreatorReviewSection: React.FC = () => {
         {/* Tablet/Desktop: Grid Layout */}
         <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredCards.map((card) => (
-            <Card 
+            <div 
               key={card.id} 
               className={cn(
-                "overflow-hidden transition-all duration-300 hover:shadow-md hover:scale-[1.02]",
-                "h-full"
+                "transition-all duration-300 hover:shadow-md hover:scale-[1.02] h-[300px]",
               )}
             >
               {renderCardContent(card)}
-            </Card>
+            </div>
           ))}
         </div>
       </div>
