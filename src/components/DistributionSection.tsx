@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import { Music, Headphones, Youtube } from 'lucide-react';
@@ -28,9 +27,8 @@ const DistributionSection: React.FC = () => {
         <p className="font-manrope text-xl text-[#4B5563] mb-4 max-w-4xl mx-auto">
           We distribute your podcast to 20+ platforms, including Spotify, Apple Podcasts, YouTube, and more.
         </p>
-        <p className="font-manrope text-lg text-[#4B5563] mb-12">
-          Trusted by over 30,000+ creators and brands
-        </p>
+        
+        {/* Removed the "Trusted by over 30,000+ creators and brands" line */}
         
         {/* Responsive desktop display for larger screens */}
         <div className="hidden md:grid grid-cols-3 lg:grid-cols-5 gap-6 mb-8">

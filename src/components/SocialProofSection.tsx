@@ -47,6 +47,9 @@ const SocialProofSection: React.FC = () => {
           <p className="font-manrope text-lg text-[#4B5563] max-w-2xl mx-auto">
             From global giants to indie voices — thousands of creators trust us to get their podcast heard.
           </p>
+          <p className="font-manrope text-lg text-[#4B5563] mt-4">
+            Trusted by over 30,000+ creators and brands
+          </p>
         </div>
         
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mb-16">
