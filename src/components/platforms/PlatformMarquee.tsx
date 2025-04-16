@@ -1,6 +1,5 @@
 
 import React, { useEffect, useRef } from 'react';
-import { Apple, Music, Youtube, Headphones, Rss, Radio, BookOpen, Star } from 'lucide-react';
 
 interface PlatformItem {
   name: string;
@@ -9,9 +8,10 @@ interface PlatformItem {
 
 interface PlatformMarqueeProps {
   platforms: PlatformItem[];
+  direction?: 'ltr' | 'rtl'; // Left to right or right to left
 }
 
-const PlatformMarquee = ({ platforms }: PlatformMarqueeProps) => {
+const PlatformMarquee = ({ platforms, direction = 'ltr' }: PlatformMarqueeProps) => {
   // Refs for animation control
   const scrollRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -29,15 +29,25 @@ const PlatformMarquee = ({ platforms }: PlatformMarqueeProps) => {
     let animationId: number;
     let isPaused = false;
     let scrollPosition = 0;
-    const speed = 0.5; // Left to right
+    const speed = 0.5; // Scroll speed
     
     const scroll = () => {
       if (!isPaused) {
-        scrollPosition += speed;
-        
-        // Reset position for seamless loop when first set of logos is out of view
-        if (scrollPosition >= scrollContent.clientWidth / 2) {
-          scrollPosition = 0;
+        // Adjust scroll direction based on prop
+        if (direction === 'ltr') {
+          scrollPosition += speed;
+          
+          // Reset position for seamless loop when first set of logos is out of view
+          if (scrollPosition >= scrollContent.clientWidth / 2) {
+            scrollPosition = 0;
+          }
+        } else {
+          scrollPosition -= speed;
+          
+          // Reset position for seamless loop when scrolled to the left
+          if (scrollPosition <= 0) {
+            scrollPosition = scrollContent.clientWidth / 2;
+          }
         }
         
         scrollContainer.scrollLeft = scrollPosition;
@@ -61,12 +71,12 @@ const PlatformMarquee = ({ platforms }: PlatformMarqueeProps) => {
       scrollContainer.removeEventListener('mouseenter', handleMouseEnter);
       scrollContainer.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, []);
+  }, [direction]);
   
   return (
     <>
-      <div className="mb-12">
-        {/* Logo scroll - Left to Right */}
+      <div className="mb-6">
+        {/* Logo scroll */}
         <div className="overflow-hidden">
           <div 
             ref={scrollContainerRef}
@@ -75,7 +85,7 @@ const PlatformMarquee = ({ platforms }: PlatformMarqueeProps) => {
           >
             <div 
               ref={scrollRef}
-              className="inline-flex gap-12 py-8"
+              className="inline-flex gap-12 py-4"
             >
               {allPlatforms.map((platform, index) => (
                 <div 
