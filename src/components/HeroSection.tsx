@@ -15,11 +15,11 @@ const HeroSection: React.FC = () => {
           loop 
           playsInline
         >
-          <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4" type="video/mp4" />
+          <source src="https://player.vimeo.com/progressive_redirect/playback/711344788/rendition/1080p/file.mp4?loc=external&signature=3ee1e5c63919ed72d6be547cf7a6ad29530612fe7add8cabc56486539098a33a" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+        {/* Dark Overlay - increased opacity for better text visibility */}
+        <div className="absolute inset-0 bg-black bg-opacity-60"></div>
       </div>
 
       {/* Content */}
