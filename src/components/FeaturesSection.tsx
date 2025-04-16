@@ -40,7 +40,7 @@ const FeaturesSection: React.FC = () => {
   return (
     <section className="py-20 px-4 bg-white">
       <div className="container mx-auto">
-        <h2 className="font-jakarta font-bold text-3xl md:text-4xl mb-8 text-center text-dark">
+        <h2 className="font-jakarta font-bold text-3xl md:text-4xl mb-8 text-center text-[#4F46E5]">
           Everything You Need. Nothing You Don't.
         </h2>
         
@@ -53,12 +53,12 @@ const FeaturesSection: React.FC = () => {
           <CarouselContent className="-ml-4">
             {features.map((feature, index) => (
               <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                <div className="bg-gray-50 p-6 rounded-xl border border-gray-100 h-full transition-all hover:shadow-md hover:bg-gray-50/80">
-                  <div className="bg-primary/10 p-3 rounded-full w-fit mb-4 text-primary">
+                <div className="bg-white p-6 rounded-xl border border-gray-100 h-full transition-all hover:shadow-md hover:bg-white">
+                  <div className="bg-[#4F46E5]/10 p-3 rounded-full w-fit mb-4 text-[#4F46E5]">
                     {feature.icon}
                   </div>
-                  <h3 className="font-jakarta font-semibold text-xl mb-2">{feature.title}</h3>
-                  <p className="font-manrope text-gray">{feature.description}</p>
+                  <h3 className="font-jakarta font-semibold text-xl mb-2 text-[#111827]">{feature.title}</h3>
+                  <p className="font-manrope text-[#4B5563]">{feature.description}</p>
                 </div>
               </CarouselItem>
             ))}
@@ -70,7 +70,7 @@ const FeaturesSection: React.FC = () => {
             {[0, 1, 2].map((_, i) => (
               <div 
                 key={i} 
-                className={`h-2 rounded-full transition-all ${i === 0 ? 'w-6 bg-primary' : 'w-2 bg-gray-200'}`}
+                className={`h-2 rounded-full transition-all ${i === 0 ? 'w-6 bg-[#4F46E5]' : 'w-2 bg-gray-200'}`}
               ></div>
             ))}
           </div>

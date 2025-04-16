@@ -20,15 +20,15 @@ const DistributionSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 px-4 bg-[#111111] text-white">
+    <section className="py-24 px-4 bg-white text-[#111827]">
       <div className="container mx-auto text-center">
-        <h2 className="font-jakarta font-bold text-4xl md:text-5xl mb-6 text-white">
+        <h2 className="font-jakarta font-bold text-4xl md:text-5xl mb-6 text-[#4F46E5]">
           Your Podcast. Everywhere It Matters.
         </h2>
-        <p className="font-manrope text-xl text-gray-300 mb-4 max-w-4xl mx-auto">
+        <p className="font-manrope text-xl text-[#4B5563] mb-4 max-w-4xl mx-auto">
           We distribute your podcast to 20+ platforms, including Spotify, Apple Podcasts, YouTube, and more.
         </p>
-        <p className="font-manrope text-lg text-gray-400 mb-12">
+        <p className="font-manrope text-lg text-[#4B5563] mb-12">
           Trusted by over 30,000+ creators and brands
         </p>
         
@@ -37,10 +37,10 @@ const DistributionSection: React.FC = () => {
           {platforms.slice(0, 10).map((platform, index) => (
             <div 
               key={index} 
-              className="bg-[#222222] rounded-xl py-6 px-4 flex flex-col items-center justify-center gap-3 transition-transform hover:scale-105"
+              className="bg-white rounded-xl py-6 px-4 flex flex-col items-center justify-center gap-3 transition-transform hover:scale-105 shadow-sm border border-gray-100"
             >
-              <div className="text-3xl">{typeof platform.logo === 'string' ? platform.logo : platform.logo}</div>
-              <span className="font-medium">{platform.name}</span>
+              <div className="text-3xl text-[#4F46E5]">{typeof platform.logo === 'string' ? platform.logo : React.cloneElement(platform.logo, { className: 'h-8 w-8 text-[#4F46E5]' })}</div>
+              <span className="font-medium text-[#4B5563]">{platform.name}</span>
             </div>
           ))}
         </div>
@@ -51,15 +51,15 @@ const DistributionSection: React.FC = () => {
             <CarouselContent>
               {platforms.map((platform, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                  <div className="bg-[#222222] rounded-xl py-6 px-4 flex flex-col items-center justify-center gap-3 h-full">
-                    <div className="text-3xl">{typeof platform.logo === 'string' ? platform.logo : platform.logo}</div>
-                    <span className="font-medium">{platform.name}</span>
+                  <div className="bg-white rounded-xl py-6 px-4 flex flex-col items-center justify-center gap-3 h-full shadow-sm border border-gray-100">
+                    <div className="text-3xl text-[#4F46E5]">{typeof platform.logo === 'string' ? platform.logo : React.cloneElement(platform.logo, { className: 'h-8 w-8 text-[#4F46E5]' })}</div>
+                    <span className="font-medium text-[#4B5563]">{platform.name}</span>
                   </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="left-2 bg-white/10 hover:bg-white/20 border-none" />
-            <CarouselNext className="right-2 bg-white/10 hover:bg-white/20 border-none" />
+            <CarouselPrevious className="left-2 bg-white hover:bg-gray-50 text-[#4F46E5] border-[#4F46E5]" />
+            <CarouselNext className="right-2 bg-white hover:bg-gray-50 text-[#4F46E5] border-[#4F46E5]" />
           </Carousel>
         </div>
       </div>

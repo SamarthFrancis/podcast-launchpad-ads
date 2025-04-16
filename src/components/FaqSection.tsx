@@ -32,9 +32,9 @@ const FaqSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gray-50">
+    <section className="py-20 px-4 bg-white">
       <div className="container mx-auto">
-        <h2 className="font-jakarta font-bold text-3xl md:text-4xl mb-12 text-center text-dark">
+        <h2 className="font-jakarta font-bold text-3xl md:text-4xl mb-12 text-center text-[#4F46E5]">
           Still Curious?
         </h2>
         
@@ -42,10 +42,10 @@ const FaqSection: React.FC = () => {
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200">
-                <AccordionTrigger className="font-jakarta font-semibold text-lg py-6">
+                <AccordionTrigger className="font-jakarta font-semibold text-lg py-6 text-[#111827]">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="font-manrope text-gray text-base pb-6">
+                <AccordionContent className="font-manrope text-[#4B5563] text-base pb-6">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
