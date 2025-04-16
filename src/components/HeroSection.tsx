@@ -15,7 +15,7 @@ const HeroSection: React.FC = () => {
           loop 
           playsInline
         >
-          <source src="https://player.vimeo.com/progressive_redirect/playback/711344788/rendition/1080p/file.mp4?loc=external&signature=3ee1e5c63919ed72d6be547cf7a6ad29530612fe7add8cabc56486539098a33a" type="video/mp4" />
+          <source src="https://player.vimeo.com/external/528726903.sd.mp4?s=d989338dda0412e60c901fe3c8d70583dc50944b&profile_id=165&oauth2_token_id=57447761" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         {/* Dark Overlay - increased opacity for better text visibility */}
