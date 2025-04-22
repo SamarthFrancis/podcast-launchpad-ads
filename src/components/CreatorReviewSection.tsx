@@ -1,8 +1,9 @@
 
 import React from 'react';
-import { MessageCircle, Facebook } from "lucide-react";
+import { MessageCircle, Facebook, Video } from "lucide-react";
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 interface ContentCard {
   id: string;
@@ -15,7 +16,9 @@ interface ContentCard {
 }
 
 const CreatorReviewSection: React.FC = () => {
-  const contentCards: ContentCard[] = [
+  const [activeView, setActiveView] = React.useState<"reviews" | "videos">("reviews");
+
+  const reviewCards: ContentCard[] = [
     {
       id: '4',
       title: "It's an awesome feeling to see your video content grow and develop viewers all around the world. Thanks for all your help and support.",
@@ -32,6 +35,27 @@ const CreatorReviewSection: React.FC = () => {
       platform: {
         name: "Facebook",
         icon: <Facebook className="h-4 w-4" />
+      }
+    }
+  ];
+
+  const videoCards: ContentCard[] = [
+    {
+      id: '1',
+      title: "Video Creation Masterclass - From Concept to Upload",
+      author: "Creative Academy",
+      platform: {
+        name: "Tutorial",
+        icon: <Video className="h-4 w-4" />
+      }
+    },
+    {
+      id: '2',
+      title: "Advanced Video Editing Techniques for Creators",
+      author: "Pro Studio",
+      platform: {
+        name: "Course",
+        icon: <Video className="h-4 w-4" />
       }
     }
   ];
@@ -68,11 +92,18 @@ const CreatorReviewSection: React.FC = () => {
             launch your successful video channel.
           </p>
         </div>
+
+        <div className="flex justify-center mb-8">
+          <ToggleGroup type="single" value={activeView} onValueChange={(value) => value && setActiveView(value as "reviews" | "videos")}>
+            <ToggleGroupItem value="reviews" className="px-6">Reviews</ToggleGroupItem>
+            <ToggleGroupItem value="videos" className="px-6">Videos</ToggleGroupItem>
+          </ToggleGroup>
+        </div>
         
         <div className="md:hidden">
           <ScrollArea className="w-full whitespace-nowrap pb-4">
             <div className="flex gap-4 px-4 pb-4">
-              {contentCards.map((card) => (
+              {(activeView === "reviews" ? reviewCards : videoCards).map((card) => (
                 <div key={card.id} className="w-[300px] flex-shrink-0">
                   {renderSocialCard(card)}
                 </div>
@@ -82,7 +113,7 @@ const CreatorReviewSection: React.FC = () => {
         </div>
         
         <div className="hidden md:grid grid-cols-2 gap-6">
-          {contentCards.map((card) => (
+          {(activeView === "reviews" ? reviewCards : videoCards).map((card) => (
             <div 
               key={card.id} 
               className={cn(
