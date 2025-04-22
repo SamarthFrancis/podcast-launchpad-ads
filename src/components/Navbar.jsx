@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   return (
     <header className="bg-white shadow-sm py-4">
       <div className="container mx-auto px-4 flex justify-between items-center">
