@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Bot, FileAudio, Globe, Share2, Users, Lock, Video, Search, BarChart3, FileText, Upload, Monitor } from 'lucide-react';
+import { Bot, FileAudio, Globe, Share2, Users, Lock, Video, Search, BarChart3, FileText, Upload, Monitor, Infinity } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 
@@ -291,6 +290,52 @@ const FeaturesSection: React.FC = () => {
                     </span>
                   ))}
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      id: "unlimited-podcasts",
+      icon: <Infinity className="h-5 w-5" />,
+      title: "Unlimited Podcasts",
+      heading: "Create Without Limits",
+      description: "Upload and manage unlimited video content with our robust hosting platform. Scale your video channel without worrying about storage constraints or bandwidth limitations.",
+      visual: (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
+            <Upload className="h-8 w-8 mb-4 text-[#4F46E5]" />
+            <h4 className="font-jakarta text-lg font-semibold mb-2">Storage Analytics</h4>
+            <div className="space-y-4">
+              <div>
+                <div className="flex justify-between mb-2">
+                  <span className="text-sm text-[#4B5563]">Storage Used</span>
+                  <span className="text-sm font-medium text-[#4F46E5]">Unlimited</span>
+                </div>
+                <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                  <div className="h-full bg-[#4F46E5] w-1/3 rounded-full"></div>
+                </div>
+              </div>
+              <div className="pt-4 border-t border-gray-100">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-[#4B5563]">Active Videos</span>
+                  <span className="text-lg font-semibold text-[#4F46E5]">∞</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
+            <Monitor className="h-8 w-8 mb-4 text-[#4F46E5]" />
+            <h4 className="font-jakarta text-lg font-semibold mb-2">Video Performance</h4>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <span className="text-sm text-[#4B5563]">Total Views</span>
+                <span className="font-medium text-[#4F46E5]">125.3K</span>
+              </div>
+              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <span className="text-sm text-[#4B5563]">Watch Time</span>
+                <span className="font-medium text-[#4F46E5]">48.2K hrs</span>
               </div>
             </div>
           </div>
