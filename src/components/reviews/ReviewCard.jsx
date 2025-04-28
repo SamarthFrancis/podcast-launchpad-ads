@@ -17,13 +17,13 @@ const ReviewCard = ({ review }) => {
   } = review;
 
   return (
-    <Card className="h-full flex flex-col">
+    <Card className="h-full flex flex-col shadow-md hover:shadow-lg transition-shadow">
       <CardHeader className="space-y-4">
         <div className="flex items-start justify-between">
           <div className="flex gap-3">
-            <Avatar className="h-12 w-12">
+            <Avatar className="h-12 w-12 border-2 border-primary/10">
               <AvatarImage src={avatarUrl} alt={name} />
-              <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+              <AvatarFallback className="bg-primary/10 text-primary font-semibold">{name.charAt(0)}</AvatarFallback>
             </Avatar>
             <div>
               <div className="font-semibold text-lg">{name}</div>
